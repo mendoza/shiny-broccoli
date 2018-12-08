@@ -3,7 +3,7 @@ import pyodbc
 # Some other example server values are
 # server = 'localhost\sqlexpress' # for a named instance
 # server = 'myserver,port' # to specify an alternate port
-server = "Localhost"
+server = "localhost"
 database = "TestDB"
 username = "SA"
 password = "Rockero99"
