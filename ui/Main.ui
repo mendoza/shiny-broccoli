@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Replicador</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>shiny-broccoli/ui/computer.png</normaloff>shiny-broccoli/ui/computer.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -39,7 +43,7 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEdit"/>
+           <widget class="QLineEdit" name="intanciaO_edit"/>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_5">
@@ -49,7 +53,7 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEdit_2"/>
+           <widget class="QLineEdit" name="nombreO_edit"/>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_6">
@@ -59,7 +63,7 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEdit_3"/>
+           <widget class="QLineEdit" name="puertoO_edit"/>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_7">
@@ -76,15 +80,15 @@
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QLineEdit" name="lineEdit_5"/>
+           <widget class="QLineEdit" name="passwordO_edit"/>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEdit_4"/>
+           <widget class="QLineEdit" name="usuarioO_edit"/>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="probarO_botton">
           <property name="text">
            <string>Probar</string>
           </property>
@@ -114,7 +118,7 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEdit_6"/>
+           <widget class="QLineEdit" name="instanciaD_edit"/>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_9">
@@ -124,7 +128,7 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEdit_7"/>
+           <widget class="QLineEdit" name="nombreD_edit"/>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_10">
@@ -134,7 +138,7 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEdit_8"/>
+           <widget class="QLineEdit" name="puestoD_edit"/>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_11">
@@ -144,7 +148,7 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEdit_9"/>
+           <widget class="QLineEdit" name="usuarioD_edit"/>
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="label_12">
@@ -154,7 +158,7 @@
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEdit_10"/>
+           <widget class="QLineEdit" name="passwordO_edit_2"/>
           </item>
           <item row="5" column="0">
            <widget class="QLabel" name="label_13">
@@ -166,7 +170,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="probarD_botton">
           <property name="text">
            <string>Probar</string>
           </property>
@@ -175,6 +179,13 @@
        </layout>
       </item>
      </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="execute_botton">
+      <property name="text">
+       <string>Execute</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

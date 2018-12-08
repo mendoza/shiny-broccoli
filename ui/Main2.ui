@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Tablas DB Origen</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>shiny-broccoli/ui/computer.png</normaloff>shiny-broccoli/ui/computer.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
@@ -29,21 +33,21 @@
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="listWidget"/>
+           <widget class="QListWidget" name="replica_list"/>
           </item>
          </layout>
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="derecha_botton">
             <property name="text">
              <string>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="izquierda_botton">
             <property name="text">
              <string>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</string>
             </property>
@@ -61,7 +65,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="listWidget_2"/>
+           <widget class="QListWidget" name="replicando_list"/>
           </item>
          </layout>
         </item>
@@ -72,14 +76,14 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QPushButton" name="pushButton_4">
+       <widget class="QPushButton" name="guardar_botton">
         <property name="text">
          <string>Guardar</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="cancelar_botton">
         <property name="text">
          <string>Cancelar</string>
         </property>
