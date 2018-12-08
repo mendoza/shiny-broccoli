@@ -20,4 +20,8 @@ cnxn = pyodbc.connect(
 cursor = cnxn.cursor()
 
 # Sample select query
-cursor.execute("SELECT * from inventory;d")
+cursor.execute("SELECT * from inventory;")
+row = cursor.fetchone()
+while row:
+    print(row)
+    row = cursor.fetchone()
