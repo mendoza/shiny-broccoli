@@ -29,12 +29,6 @@ class Main2Window(QtGui.QMainWindow):
                 passwd=mysqldict["password"],
                 database=mysqldict["nombredb"],
             )
-            self.mycursor = self.mysqlcon.cursor()
-            self.mycursor.execute("show tables;")
-            myresult = self.mycursor.fetchall()
-            for i in range(len(myresult)):
-                myresult[i] = str(myresult[i][0])
-            self.replicando_list.addItems(myresult)
             self.sqlcursor.execute(
                 "SELECT TABLE_NAME FROM "
                 + sqldict["nombredb"]
