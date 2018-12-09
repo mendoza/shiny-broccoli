@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>786</width>
-    <height>352</height>
+    <height>354</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,11 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-<<<<<<< Updated upstream
     <normaloff>shiny-broccoli/ui/computer.png</normaloff>shiny-broccoli/ui/computer.png</iconset>
-=======
-    <normaloff>computer.png</normaloff>computer.png</iconset>
->>>>>>> Stashed changes
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -47,7 +43,7 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="intanciaO_edit"/>
+           <widget class="QLineEdit" name="instanciaO_edit"/>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_5">
@@ -142,7 +138,7 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="puestoD_edit"/>
+           <widget class="QLineEdit" name="puertoD_edit"/>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_11">
@@ -162,7 +158,7 @@
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QLineEdit" name="passwordO_edit_2"/>
+           <widget class="QLineEdit" name="passwordD_edit"/>
           </item>
           <item row="5" column="0">
            <widget class="QLabel" name="label_13">
