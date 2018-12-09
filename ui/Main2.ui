@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Tablas DB Origen</string>
+   <string>Replicador</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>computer.png</normaloff>computer.png</iconset>
   </property>
   <property name="windowIcon">
    <iconset>
