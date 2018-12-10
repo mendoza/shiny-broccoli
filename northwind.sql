@@ -778,63 +778,63 @@ INSERT INTO Products_log VALUES ('delete',(SELECT TOP 1  inserted.ProductID FROM
 GO
 --Triggers Order Details
 CREATE TRIGGER afterinsertorderdetails
-ON "order details"
-AFTER INSERT
+ON [order details]
+AFTER INSERTx
 AS
 INSERT INTO OrderDetails_log VALUES ('Insert',(SELECT TOP 1  inserted.OrderID FROM inserted))
 GO
 
 CREATE TRIGGER afterupdateorderdetails
-ON "order details"
+ON [order details]
 AFTER UPDATE
 AS
 INSERT INTO OrderDetails_log VALUES ('update',(SELECT TOP 1  inserted.OrderID FROM inserted))
 GO
 
 CREATE TRIGGER afterdeleteorderdetails
-ON "order details"
+ON [order details]
 AFTER DELETE
 AS
 INSERT INTO OrderDetails_log VALUES ('delete',(SELECT TOP 1  inserted.OrderID FROM inserted))
 GO
 --Triggers CustomerCustomerDemo
 CREATE TRIGGER afterinsertcustomercustomerdemo
-ON CUSTOMERCUSTOMERDEMO
+ON [CUSTOMER CUSTOMER DEMO]
 AFTER INSERT
 AS
 INSERT INTO CustomerCustomerDemo_log VALUES ('Insert',(SELECT TOP 1  inserted.CustomerID FROM inserted))
 GO
 
 CREATE TRIGGER afterupdatecustomercustomerdemo
-ON CUSTOMERCUSTOMERDEMO
+ON [CUSTOMER CUSTOMER DEMO]
 AFTER UPDATE
 AS
 INSERT INTO CustomerCustomerDemo_log VALUES ('update',(SELECT TOP 1  inserted.CustomerID  FROM inserted))
 GO
 
 CREATE TRIGGER afterdeletecustomercustomerdemo
-ON CUSTOMERCUSTOMERDEMO
+ON [CUSTOMER CUSTOMER DEMO]
 AFTER DELETE
 AS
 INSERT INTO CustomerCustomerDemo_log  VALUES ('delete',(SELECT TOP 1  inserted.CustomerID  FROM inserted))
 GO
 --Triggers CustomerDemographics
 CREATE TRIGGER afterinsertcustomerdemographics
-ON CUSTOMERDEMOGRAPHICS
+ON [CUSTOMER DEMO GRAPHICS]
 AFTER INSERT
 AS
 INSERT INTO CustomerDemographics_log VALUES ('Insert',(SELECT TOP 1 inserted.CustomerDemographicsID FROM inserted))
 GO
 
 CREATE TRIGGER afterupdatecustomerdemographics
-ON CUSTOMERDEMOGRAPHICS
+ON [CUSTOMER DEMO GRAPHICS]
 AFTER UPDATE
 AS
 INSERT INTO CustomerDemographics_log VALUES ('Update',(SELECT TOP 1 inserted.CustomerDemographicsID FROM inserted))
 GO
 
 CREATE TRIGGER afterdeletecustomerdemographics
-ON CUSTOMERDEMOGRAPHICS
+ON [CUSTOMER DEMO GRAPHICS]
 AFTER DELETE
 AS
 INSERT INTO CustomerDemographics_log VALUES ('Delete',(SELECT TOP 1 inserted.CustomerDemographicsID FROM inserted))
@@ -865,42 +865,42 @@ CREATE TRIGGER afterinsertterritories
 ON TERRITORIES
 AFTER INSERT
 AS
-INSERT INTO Territories_log VALUES ('Insert',(SELECT TOP 1  inserted.TerritoriesID FROM inserted))
+INSERT INTO Territories_log VALUES ('Insert',(SELECT TOP 1  inserted.TerritoryID FROM inserted))
 GO
 
 CREATE TRIGGER afterupdateterritories
 ON TERRITORIES
 AFTER UPDATE
 AS
-INSERT INTO Territories_log VALUES ('update',(SELECT TOP 1  inserted.TerritoriesID FROM inserted))
+INSERT INTO Territories_log VALUES ('update',(SELECT TOP 1  inserted.TerritoryID FROM inserted))
 GO
 
 CREATE TRIGGER afterdeleteterritories
 ON TERRITORIES
 AFTER DELETE
 AS
-INSERT INTO Territories_log VALUES ('delete',(SELECT TOP 1  inserted.TerritoriesID FROM inserted))
+INSERT INTO Territories_log VALUES ('delete',(SELECT TOP 1  inserted.TerritoryID FROM inserted))
 GO
 --Triggers EmployeeTerritories
 CREATE TRIGGER afterinsertemployeeterritories
-ON EMPLOYEETERRITORRIES
+ON [EMPLOYEE TERRITORRIES]
 AFTER INSERT
 AS
-INSERT INTO EmployeeTerritories_log VALUES ('Insert',(SELECT TOP 1 inserted.EmployeeTerritoriesID FROM inserted))
+INSERT INTO EmployeeTerritories_log VALUES ('Insert',(SELECT TOP 1 inserted.EmployeeTerritoryID FROM inserted))
 GO
 
 CREATE TRIGGER afterupdateemployeeterritories
-ON EMPLOYEETERRITORRIES
+ON [EMPLOYEE TERRITORRIES]
 AFTER UPDATE
 AS
-INSERT INTO EmployeeTerritories_log VALUES ('Update',(SELECT TOP 1 inserted.EmployeeTerritoriesID FROM inserted))
+INSERT INTO EmployeeTerritories_log VALUES ('Update',(SELECT TOP 1 inserted.EmployeeTerritorysID FROM inserted))
 GO
 
 CREATE TRIGGER afterdeleteemployeeterritories
-ON EMPLOYEETERRITORRIES
+ON [EMPLOYEE TERRITORRIES]
 AFTER DELETE
 AS
-INSERT INTO EmployeeTerritories VALUES ('Delete',(SELECT TOP 1 inserted.EmployeeTerritoriesID FROM inserted))
+INSERT INTO EmployeeTerritories_log VALUES ('Delete',(SELECT TOP 1 inserted.EmployeeTerritoryID FROM inserted))
 GO
 
 --TRIGGERS TERMINAN
