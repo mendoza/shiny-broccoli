@@ -628,7 +628,8 @@ CREATE TABLE EmployeeTerritories_log
 GO
 --Aqui terminan las tablas bitacoras
 
-
+--Triggers empiezan
+--Triggers employee
 CREATE TRIGGER afterinsertemployees
 ON EMPLOYEES
 AFTER INSERT
