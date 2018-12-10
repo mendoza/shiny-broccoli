@@ -1,2 +1,2 @@
-sqlserver|PRUEBA|1433|SA|Rockero99
-mysql|PRUEBA|3306|root|root
+sqlserver|northwind|1433|SA|Rockero99
+mysql|northwind|3306|root|root
