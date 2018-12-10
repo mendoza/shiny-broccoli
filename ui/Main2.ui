@@ -78,7 +78,7 @@
       <item>
        <widget class="QPushButton" name="guardar_botton">
         <property name="text">
-         <string>Guardar</string>
+         <string>Iniciar</string>
         </property>
        </widget>
       </item>
