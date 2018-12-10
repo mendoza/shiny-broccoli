@@ -15,10 +15,6 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>computer.png</normaloff>computer.png</iconset>
-  </property>
-  <property name="windowIcon">
-   <iconset>
     <normaloff>shiny-broccoli/ui/computer.png</normaloff>shiny-broccoli/ui/computer.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -98,6 +94,34 @@
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>791</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionAbrir"/>
+    <addaction name="actionGuardar"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <action name="actionAbrir">
+   <property name="text">
+    <string>Abrir</string>
+   </property>
+  </action>
+  <action name="actionGuardar">
+   <property name="text">
+    <string>Guardar</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
