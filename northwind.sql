@@ -9509,6 +9509,7 @@ CREATE TABLE [dbo].[EmployeeTerritories]
 	[TerritoryID] [nvarchar] (20) NOT NULL 
 ) ON [PRIMARY]
 
+-- nue
 -- The following adds data to the tables just created.
 
 Insert Into Region Values (1,'Eastern')
