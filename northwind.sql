@@ -9395,21 +9395,21 @@ CREATE TRIGGER afterinsertterritories
 ON [dbo].[Territories] 
 AFTER INSERT
 AS
-INSERT INTO MASTER_LOG VALUES ('Insert','Territo',(SELECT TOP 1  inserted.TerritoryID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Insert','Territories',(SELECT TOP 1  inserted.TerritoryID FROM inserted))
 GO
 
 CREATE TRIGGER afterupdateterritories
 ON [dbo].[Territories] 
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','Territo',(SELECT TOP 1  inserted.TerritoryID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Territories',(SELECT TOP 1  inserted.TerritoryID FROM inserted))
 GO
 
 CREATE TRIGGER afterdeleteterritories
 ON [dbo].[Territories] 
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','Territo',(SELECT TOP 1  inserted.TerritoryID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Territories',(SELECT TOP 1  inserted.TerritoryID FROM inserted))
 GO
 
 
