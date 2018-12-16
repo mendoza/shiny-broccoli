@@ -552,147 +552,147 @@ CREATE TRIGGER afterinsertemployees
 ON EMPLOYEES
 AFTER INSERT
 AS
-INSERT INTO MASTER_LOG VALUES ('Insert','EMPLOYEES',0,(SELECT TOP 1  inserted.EmployeeID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Insert','Employees',0,(SELECT TOP 1  inserted.EmployeeID FROM inserted))
 GO
 
 CREATE TRIGGER afterupdateemployees
 ON EMPLOYEES
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','EMPLOYEES',0,(SELECT TOP 1  inserted.EmployeeID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Employeess',0,(SELECT TOP 1  inserted.EmployeeID FROM inserted))
 GO
 
 CREATE TRIGGER afterdeleteemployees
 ON EMPLOYEES
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','EMPLOYEES',0,(SELECT TOP 1  inserted.EmployeeID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Employeess',0,(SELECT TOP 1  inserted.EmployeeID FROM inserted))
 GO
 --Triggers categories
 CREATE TRIGGER afterinsertcategories
 ON CATEGORIES
 AFTER INSERT
 AS
-INSERT INTO MASTER_LOG VALUES ('Insert','CATEGORIES',0,(SELECT TOP 1  inserted.CategoryID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Insert','Categories',0,(SELECT TOP 1  inserted.CategoryID FROM inserted))
 GO
 
 CREATE TRIGGER afterupdatecategories
 ON CATEGORIES
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','CATEGORIES',0,(SELECT TOP 1  inserted.CategoryID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Categories',0,(SELECT TOP 1  inserted.CategoryID FROM inserted))
 GO
 
 CREATE TRIGGER afterdeletecategories
 ON CATEGORIES
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','CATEGORIES',0,(SELECT TOP 1  inserted.CategoryID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Categories',0,(SELECT TOP 1  inserted.CategoryID FROM inserted))
 GO
 --Triggers customers
 CREATE TRIGGER afterinsertcustomers
 ON CUSTOMERS
 AFTER INSERT
 AS
-INSERT INTO MASTER_LOG VALUES ('Insert','CUSTOMERS',0,(SELECT TOP 1  inserted.CustomerID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Insert','Customers',0,(SELECT TOP 1  inserted.CustomerID FROM inserted))
 GO
 
 CREATE TRIGGER afterupdatecostumers
 ON CUSTOMERS
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','CUSTOMERS',0,(SELECT TOP 1  inserted.CustomerID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Customers',0,(SELECT TOP 1  inserted.CustomerID FROM inserted))
 GO
 
 CREATE TRIGGER afterdeletecustomers
 ON CUSTOMERS
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','CUSTOMERS',0,(SELECT TOP 1  inserted.CustomerID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Customers',0,(SELECT TOP 1  inserted.CustomerID FROM inserted))
 GO
 --Triggers Shippers
 CREATE TRIGGER afterinsertshippers
 ON SHIPPERS
 AFTER INSERT
 AS
-INSERT INTO MASTER_LOG VALUES ('Insert','SHIPPERS',0,(SELECT TOP 1  inserted.ShipperID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Insert','Shippers',0,(SELECT TOP 1  inserted.ShipperID FROM inserted))
 GO
 
 CREATE TRIGGER afterupdateshippers
 ON SHIPPERS
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','SHIPPERS',0,(SELECT TOP 1  inserted.ShipperID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Shippers',0,(SELECT TOP 1  inserted.ShipperID FROM inserted))
 GO
 
 CREATE TRIGGER afterdeleteshippers
 ON SHIPPERS
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','SHIPPERS',0,(SELECT TOP 1  inserted.ShipperID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Shippers',0,(SELECT TOP 1  inserted.ShipperID FROM inserted))
 GO
 --Triggers Suppliers
 CREATE TRIGGER afterinsertsuppliers
 ON SUPPLIERS
 AFTER INSERT
 AS
-INSERT INTO MASTER_LOG VALUES ('Insert','SUPPLIERS',0,(SELECT TOP 1  inserted.SupplierID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Insert','Suppliers',0,(SELECT TOP 1  inserted.SupplierID FROM inserted))
 GO
 
 CREATE TRIGGER afterupdatesuppliers
 ON SUPPLIERS
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','SUPPLIERS',0,(SELECT TOP 1  inserted.SupplierID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Suppliers',0,(SELECT TOP 1  inserted.SupplierID FROM inserted))
 GO
 
 CREATE TRIGGER afterdeletesuppliers
 ON SUPPLIERS
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','SUPPLIERS',0,(SELECT TOP 1  inserted.SupplierID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Suppliers',0,(SELECT TOP 1  inserted.SupplierID FROM inserted))
 GO
 --Triggers Orders
 CREATE TRIGGER afterinsertorders
 ON ORDERS
 AFTER INSERT
 AS
-INSERT INTO MASTER_LOG VALUES ('Insert','ORDERS',0,(SELECT TOP 1  inserted.OrderID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Insert','Orders',0,(SELECT TOP 1  inserted.OrderID FROM inserted))
 GO
 
 CREATE TRIGGER afterupdateorders
 ON ORDERS
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','ORDERS',0,(SELECT TOP 1  inserted.OrderID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Orders',0,(SELECT TOP 1  inserted.OrderID FROM inserted))
 GO
 
 CREATE TRIGGER afterdeleteorders
 ON ORDERS
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','ORDERS',0,(SELECT TOP 1  inserted.OrderID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Orders',0,(SELECT TOP 1  inserted.OrderID FROM inserted))
 GO
 --Triggers Products
 CREATE TRIGGER afterinsertproducts
 ON PRODUCTS
 AFTER INSERT
 AS
-INSERT INTO MASTER_LOG VALUES ('Insert','PRODUCTS',0,(SELECT TOP 1  inserted.ProductID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Insert','Products',0,(SELECT TOP 1  inserted.ProductID FROM inserted))
 GO
 
 CREATE TRIGGER afterupdateproducts
 ON PRODUCTS
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','PRODUCTS',0,(SELECT TOP 1  inserted.ProductID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Products',0,(SELECT TOP 1  inserted.ProductID FROM inserted))
 GO
 
 CREATE TRIGGER afterdeleteproducts
 ON PRODUCTS
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','PRODUCTS',0,(SELECT TOP 1  inserted.ProductID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Products',0,(SELECT TOP 1  inserted.ProductID FROM inserted))
 GO
 
 
@@ -854,6 +854,29 @@ set quoted_identifier on
 go
 ALTER TABLE "Order Details" NOCHECK CONSTRAINT ALL
 go
+
+--Triggers order details
+CREATE TRIGGER afterinsertorderdetails
+ON [dbo].[Order Details] 
+AFTER INSERT
+AS
+INSERT INTO MASTER_LOG VALUES ('Insert','Order Details',0,(SELECT TOP 1  inserted.OrderID FROM inserted))
+GO
+
+CREATE TRIGGER afterupdateorderdetails
+ON [dbo].[Order Details] 
+AFTER UPDATE
+AS
+INSERT INTO MASTER_LOG VALUES ('update','Order Details',0,(SELECT TOP 1  inserted.OrderID FROM inserted))
+GO
+
+CREATE TRIGGER afterdeleteorderdetails
+ON [dbo].[Order Details] 
+AFTER DELETE
+AS
+INSERT INTO MASTER_LOG VALUES ('delete','Order Details',0,(SELECT TOP 1  inserted.OrderID FROM inserted))
+GO
+
 INSERT "Order Details" VALUES(10248,11,14,12,0)
 INSERT "Order Details" VALUES(10248,42,9.8,10,0)
 INSERT "Order Details" VALUES(10248,72,34.8,5,0)
@@ -9410,7 +9433,6 @@ AFTER DELETE
 AS
 INSERT INTO MASTER_LOG VALUES ('delete','Territories',0,(SELECT TOP 1  inserted.TerritoryID FROM inserted))
 GO
-
 
 
 -- The following adds data to the tables just created.

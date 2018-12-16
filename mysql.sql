@@ -6,7 +6,7 @@ CREATE TABLE Employees (
 	TitleOfCourtesy varchar(25) NULL,
 	BirthDate datetime NULL,
 	HireDate datetime NULL, 
-	EAddress varchar(60) NULL,
+	Address varchar(60) NULL,
 	City varchar(15) NULL,
 	Region varchar(15) NULL,
 	PostalCode varchar(10) NULL,
@@ -24,7 +24,7 @@ CREATE TABLE Employees (
 CREATE TABLE Categories (
 	CategoryID int(11)  NOT NULL auto_increment,
 	CategoryName varchar(15) NOT NULL ,
-	CDescription text NULL ,
+	Description text NULL ,
 	Picture blob NULL ,
     PRIMARY KEY(CategoryID)
 );
@@ -69,13 +69,19 @@ CREATE TABLE Suppliers (
 
 CREATE TABLE Orders (
     OrderID int(11) NOT NULL auto_increment,
-    CostumerID char(5) NULL,
+    CustomerID char(5) NULL,
     EmployeeID int(11) NULL,
     OrderDate datetime NULL,
-    RequireDate datetime NULL,
+    RequiredDate datetime NULL,
     ShippedDate datetime NULL,
     ShipVia int(11) NULL,
     Freight float(6) NULL,
+	ShipName varchar (40) NULL ,
+	ShipAddress varchar (60) NULL ,
+	ShipCity varchar (15) NULL ,
+	ShipRegion varchar (15) NULL ,
+	ShipPostalCode varchar (10) NULL ,
+	ShipCountry varchar (15) NULL ,
     PRIMARY KEY (OrderID)
 );
 
@@ -93,14 +99,13 @@ CREATE TABLE  `Order Details` (
     OrderID int(11) NOT NULL PRIMARY KEY, 
     ProductID int(11) NOT NULL,
     UnitPrice float(11) NOT NULL,
-    CONSTRAINT FK_orderid FOREIGN KEY (OrderID)
-    REFERENCES Orders(OrderID)
+    Quantity int(11) NOT NULL,
+	Discount float(11) NOT NULL
 );
 
 CREATE TABLE CustomerCustomerDemo(
     CustomerID char(5) NOT NULL,
 	CustomerTypeID char (10) NOT NULL,
-    FOREIGN KEY(CustomerId) REFERENCES Customers(CustomerID),
 	PRIMARY KEY (CustomerID)
 );
 
@@ -127,6 +132,5 @@ CREATE TABLE Territories (
 CREATE TABLE EmployeeTerritories (
 	EmployeeID int(11) NOT NULL,
 	TerritoryID varchar (20) NOT NULL ,
-    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
     PRIMARY KEY (EmployeeID)
 );
