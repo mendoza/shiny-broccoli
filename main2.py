@@ -10,19 +10,30 @@ numbers = []
 
 
 class replicador(QThread):
-    def __init__(self):
+    def __init__(self, sqldict, mysqldict):
         QThread.__init__(self)
+        self.sqldict = sqldict
+        self.mysqldict = mysqldict
 
     def __del__(self):
-        self.wait()
+        pass
 
     def run(self):
-        i = 0
+        sqlcon = pyodbc.connect(
+            "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
+            + self.sqldict["server"]
+            + ";DATABASE="
+            + self.sqldict["nombredb"]
+            + ";UID="
+            + self.sqldict["user"]
+            + ";PWD="
+            + self.sqldict["password"]
+        )
+        sqlcursor = sqlcon.cursor()
         while True:
-            print("hello" + str(i))
-            i += 1
-            for i in range(len(tables)):
-                print(i)
+            sqlcursor.execute("SELECT * FROM MASTER_LOG")
+            results = sqlcursor.fetchall()
+            print(len(results))
             self.sleep(2)
 
 
@@ -31,11 +42,36 @@ class Main2Window(QtGui.QMainWindow):
         if not self.rep.isRunning():
             self.rep.start()
 
+    def replicar(self):
+        tabla = str(self.replica_list.selectedItems()[0].text())
+        self.replicando_list.clear()
+        if tabla not in self.mytables:
+            self.mytables.append(tabla)
+        self.replica_list.clear()
+        self.sqltables.remove(tabla)
+        self.sqltables = sorted(self.sqltables)
+        self.mytables = sorted(self.mytables)
+        self.replica_list.addItems(self.sqltables)
+        self.replicando_list.addItems(self.mytables)
+
+    def desreplicar(self):
+        tabla = str(self.replicando_list.selectedItems()[0].text())
+        self.replica_list.clear()
+        if tabla not in self.sqltables:
+            self.sqltables.append(tabla)
+        self.replicando_list.clear()
+        self.mytables.remove(tabla)
+        self.mytables = sorted(self.mytables)
+        self.sqltables = sorted(self.sqltables)
+        self.replicando_list.addItems(self.mytables)
+        self.replica_list.addItems(self.sqltables)
+
     def __init__(self, sqldict, mysqldict):
         super(Main2Window, self).__init__()
         QtGui.QMainWindow.__init__(self)
         uic.loadUi("./ui/Main2.ui", self)
-        self.rep = replicador()
+        self.rep = replicador(sqldict, mysqldict)
+        self.mytables = []
         try:
             self.sqlcon = pyodbc.connect(
                 "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
@@ -58,14 +94,18 @@ class Main2Window(QtGui.QMainWindow):
             self.sqlcursor.execute(
                 "SELECT TABLE_NAME FROM "
                 + sqldict["nombredb"]
-                + " .INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'"
+                + ".INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'"
             )
-            myresult = self.sqlcursor.fetchall()
-            for i in range(len(myresult)):
-                myresult[i] = str(myresult[i][0])
-            self.replica_list.addItems(myresult)
-
-        except:
-            pass
+            self.sqltables = self.sqlcursor.fetchall()
+            for i in range(len(self.sqltables)):
+                self.sqltables[i] = str(self.sqltables[i][0])
+            self.sqltables.remove('MASTER_LOG')
+            self.sqltables = sorted(self.sqltables)
+            self.replica_list.addItems(self.sqltables)
+            self.derecha_botton.clicked.connect(self.replicar)
+            self.izquierda_botton.clicked.connect(self.desreplicar)
+        except Exception as e:
+            print "exception"
+            print(e)
 
         self.guardar_botton.clicked.connect(self.run_repli)

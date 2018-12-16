@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>shiny-broccoli/ui/computer.png</normaloff>shiny-broccoli/ui/computer.png</iconset>
+    <normaloff>computer.png</normaloff>computer.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -195,7 +195,7 @@
      <x>0</x>
      <y>0</y>
      <width>786</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
