@@ -7,6 +7,8 @@ import json
 
 tables = []
 numbers = []
+mytables = []
+sqltables = []
 
 
 class replicador(QThread):
@@ -19,6 +21,8 @@ class replicador(QThread):
         pass
 
     def run(self):
+        global mytables
+        global sqltables
         sqlcon = pyodbc.connect(
             "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
             + self.sqldict["server"]
@@ -39,9 +43,52 @@ class replicador(QThread):
         sqlcursor = sqlcon.cursor()
         mycursor = mysqlcon.cursor()
         while True:
-            sqlcursor.execute("SELECT * FROM MASTER_LOG")
+            sqlcursor.execute("SELECT * FROM MASTER_LOG where bandera <> 1")
             results = sqlcursor.fetchall()
-            print(len(results))
+            # el cero id del cambio
+            # el uno nuestro tipo
+            # el dos es nuestra tabla
+            # el  tres es nuestra bandera
+            # el cuatro es nuestro id modificado
+            for tabla in results:
+                if tabla[2].lower() in map(lambda a: a.lower(), mytables):
+                    if tabla[1].lower() == "delete".lower() and tabla[3] == False:
+                        pass
+                    elif tabla[1].lower() == "update".lower() and tabla[3] == False:
+                        pass
+                    elif tabla[1].lower() == "insert".lower() and tabla[3] == False:
+                        sqlcursor.execute(
+                            "SELECT COLUMN_NAME FROM "+str(self.sqldict['nombredb'])+".INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE TABLE_NAME LIKE '"+str(tabla[2])+"' AND CONSTRAINT_NAME LIKE 'PK%'")
+                        pk = sqlcursor.fetchone()[0]
+                        sqlcursor.execute(
+                            "SELECT * FROM "+str(tabla[2]+" where "+pk+" ="+tabla[4]))
+                        valores = sqlcursor.fetchone()
+                        sqlcursor.execute("SELECT COLUMN_NAME FROM " +
+                                          self.sqldict["nombredb"]+".INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='"+str(tabla[2])+"'")
+                        columnas = sqlcursor.fetchall()
+                        columnas = map(lambda a: a[0], columnas)
+                        values = "("
+                        print(list(valores)[0])
+                        for i in range(len(valores)):
+                            if i != len(valores)-1:
+                                values += "%s,"
+                            else:
+                                values += "%s)"
+                        columns = "("
+                        for i in range(len(columnas)):
+                            if i != len(valores)-1:
+                                columns += columnas[i]+","
+                            else:
+                                columns += columnas[i]+")"
+                        print("INSERT INTO " +
+                              str(tabla[2])+" "+columns+" VALUES "+values)
+                        mycursor.execute(
+                            "INSERT INTO "+str(tabla[2])+" "+columns+" VALUES "+values, valores)
+                        sqlcursor.execute(
+                            "UPDATE MASTER_LOG SET bandera=1 where id="+str(tabla[0]))
+
+                else:
+                    continue
             self.sleep(2)
 
 
@@ -51,35 +98,40 @@ class Main2Window(QtGui.QMainWindow):
             self.rep.start()
 
     def replicar(self):
+        global mytables
+        global sqltables
         tabla = str(self.replica_list.selectedItems()[0].text())
         self.replicando_list.clear()
-        if tabla not in self.mytables:
-            self.mytables.append(tabla)
+        if tabla not in mytables:
+            mytables.append(tabla)
         self.replica_list.clear()
-        self.sqltables.remove(tabla)
-        self.sqltables = sorted(self.sqltables)
-        self.mytables = sorted(self.mytables)
-        self.replica_list.addItems(self.sqltables)
-        self.replicando_list.addItems(self.mytables)
+        sqltables.remove(tabla)
+        sqltables = sorted(sqltables)
+        mytables = sorted(mytables)
+        self.replica_list.addItems(sqltables)
+        self.replicando_list.addItems(mytables)
 
     def desreplicar(self):
+        global mytables
+        global sqltables
         tabla = str(self.replicando_list.selectedItems()[0].text())
         self.replica_list.clear()
-        if tabla not in self.sqltables:
-            self.sqltables.append(tabla)
+        if tabla not in sqltables:
+            sqltables.append(tabla)
         self.replicando_list.clear()
-        self.mytables.remove(tabla)
-        self.mytables = sorted(self.mytables)
-        self.sqltables = sorted(self.sqltables)
-        self.replicando_list.addItems(self.mytables)
-        self.replica_list.addItems(self.sqltables)
+        mytables.remove(tabla)
+        mytables = sorted(mytables)
+        sqltables = sorted(sqltables)
+        self.replicando_list.addItems(mytables)
+        self.replica_list.addItems(sqltables)
 
     def __init__(self, sqldict, mysqldict):
         super(Main2Window, self).__init__()
         QtGui.QMainWindow.__init__(self)
         uic.loadUi("./ui/Main2.ui", self)
+        global mytables
+        global sqltables
         self.rep = replicador(sqldict, mysqldict)
-        self.mytables = []
         try:
             self.sqlcon = pyodbc.connect(
                 "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
@@ -104,12 +156,12 @@ class Main2Window(QtGui.QMainWindow):
                 + sqldict["nombredb"]
                 + ".INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'"
             )
-            self.sqltables = self.sqlcursor.fetchall()
-            for i in range(len(self.sqltables)):
-                self.sqltables[i] = str(self.sqltables[i][0])
-            self.sqltables.remove('MASTER_LOG')
-            self.sqltables = sorted(self.sqltables)
-            self.replica_list.addItems(self.sqltables)
+            sqltables = self.sqlcursor.fetchall()
+            for i in range(len(sqltables)):
+                sqltables[i] = str(sqltables[i][0])
+            sqltables.remove('MASTER_LOG')
+            sqltables = sorted(sqltables)
+            self.replica_list.addItems(sqltables)
             self.derecha_botton.clicked.connect(self.replicar)
             self.izquierda_botton.clicked.connect(self.desreplicar)
         except Exception as e:
