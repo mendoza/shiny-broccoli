@@ -47,7 +47,7 @@ CREATE TABLE Customers (
 CREATE TABLE Shippers (
     ShippersID int(11) NOT NULL auto_increment,
     CompanyName varchar(40) NOT NULL,
-    Phone varchar(24) NULL
+    Phone varchar(24) NULL,
     PRIMARY KEY (ShippersID)
 );
 
@@ -63,7 +63,7 @@ CREATE TABLE Suppliers (
     Coountry varchar(10) NULL,
     Phone varchar(24) NULL,
     Fax varchar(24) NULL,
-    HamePage varchar(max) NULL,
+    HamePage varchar(500) NULL,
     PRIMARY KEY(SuppliersID)
 );
 
@@ -76,7 +76,7 @@ CREATE TABLE Orders (
     ShippedDate datetime NULL,
     ShipVia int(11) NULL,
     Freight float(6) NULL,
-    PRIMARY KEY (OrdersID)
+    PRIMARY KEY (OrderID)
 );
 
 CREATE TABLE Products (
@@ -89,22 +89,24 @@ CREATE TABLE Products (
     PRIMARY KEY(ProductID)
 );
 
-CREATE TABLE Order Details (
-    OrderID int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE  `Order Details` (
+    OrderID int(11) NOT NULL PRIMARY KEY, 
     ProductID int(11) NOT NULL,
     UnitPrice float(11) NOT NULL,
-    PRIMARY KEY (OrderID)
+    CONSTRAINT FK_orderid FOREIGN KEY (OrderID)
+    REFERENCES Orders(OrderID)
 );
 
 CREATE TABLE CustomerCustomerDemo(
-    CustomerID char(max) NOT NULL,
+    CustomerID char(5) NOT NULL,
 	CustomerTypeID char (10) NOT NULL,
+    FOREIGN KEY(CustomerId) REFERENCES Customers(CustomerID),
 	PRIMARY KEY (CustomerID)
 );
 
 CREATE TABLE CustomerDemographics (
 	CustomerTypeID char (10) NOT NULL ,
-	CustomerDesc varchar(max) NULL ,
+	CustomerDesc varchar(500) NULL ,
     PRIMARY KEY (CustomerTypeID)
 ); 		
 	
@@ -124,6 +126,7 @@ CREATE TABLE Territories (
 
 CREATE TABLE EmployeeTerritories (
 	EmployeeID int(11) NOT NULL,
-	TerritoryID varchar (20) NOT NULL 
+	TerritoryID varchar (20) NOT NULL ,
+    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
     PRIMARY KEY (EmployeeID)
 );

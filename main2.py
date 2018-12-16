@@ -1,6 +1,6 @@
 import sys
 from PyQt4 import QtCore, QtGui, uic
-from PyQt4.QtCore import QThread, SIGNAL
+from PyQt4.QtCore import QThread
 import mysql.connector
 import pyodbc
 import json
@@ -29,7 +29,15 @@ class replicador(QThread):
             + ";PWD="
             + self.sqldict["password"]
         )
+        mysqlcon = mysql.connector.connect(
+            host=self.mysqldict["server"],
+            port=self.mysqldict["puerto"],
+            user=self.mysqldict["user"],
+            passwd=self.mysqldict["password"],
+            database=self.mysqldict["nombredb"],
+        )
         sqlcursor = sqlcon.cursor()
+        mycursor = mysqlcon.cursor()
         while True:
             sqlcursor.execute("SELECT * FROM MASTER_LOG")
             results = sqlcursor.fetchall()
