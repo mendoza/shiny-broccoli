@@ -144,6 +144,9 @@ class Main2Window(QtGui.QMainWindow):
         if not self.rep.isRunning():
             self.rep.start()
 
+    def stop_thread(self):
+        self.rep.terminate()
+
     def replicar(self):
         global mytables
         global sqltables
@@ -216,3 +219,4 @@ class Main2Window(QtGui.QMainWindow):
             print(e)
 
         self.guardar_botton.clicked.connect(self.run_repli)
+        self.cancelar_botton.clicked.connect(self.stop_thread)
