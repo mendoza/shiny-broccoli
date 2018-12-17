@@ -70,7 +70,6 @@ class replicador(QThread):
                         except Exception as e:
                             print(e)
                     elif tabla[1].lower() == "update".lower() and tabla[3] == False:
-
                         sqlcursor.execute(
                             "SELECT COLUMN_NAME FROM "+str(self.sqldict['nombredb'])+".INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE TABLE_NAME LIKE '"+str(tabla[2])+"' AND CONSTRAINT_NAME LIKE 'PK%'")
                         resultado = sqlcursor.fetchall()[0]
@@ -82,7 +81,23 @@ class replicador(QThread):
                                           self.sqldict["nombredb"]+".INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='"+str(tabla[2])+"'")
                         columnas = sqlcursor.fetchall()
                         columnas = map(lambda a: a[0], columnas)
-
+                        values = " SET "
+                        for i in range(len(valores)):
+                            if i != len(valores)-1:
+                                values += str(columnas[i])+"=%s,"
+                            else:
+                                values += str(columnas[i])+"=%s"
+                        try:
+                            print("UPDATE "+tabla[2]+values +
+                                  "WHERE "+pk+"="+tabla[4])
+                            mycursor.execute(
+                                "UPDATE "+tabla[2]+values + "WHERE "+pk+"="+tabla[4], list(valores))
+                            mysqlcon.commit()
+                            sqlcursor.execute(
+                                "UPDATE MASTER_LOG SET bandera=1 where id="+str(tabla[0]))
+                            sqlcon.commit()
+                        except Exception as e:
+                            print(e)
                     elif tabla[1].lower() == "insert".lower() and tabla[3] == False:
                         sqlcursor.execute(
                             "SELECT COLUMN_NAME FROM "+str(self.sqldict['nombredb'])+".INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE TABLE_NAME LIKE '"+str(tabla[2])+"' AND CONSTRAINT_NAME LIKE 'PK%'")
