@@ -92,6 +92,10 @@ CREATE TABLE Products (
     CategoryID int(11) NULL,
     QuantityPerUnit varchar(20) NULL,
     UnitPrice float(11) NULL,
+    UnitsInStock int(11) NULL,
+	UnitsOnOrder int(11) NULL,
+	ReorderLevel int(11) NULL,
+	Discontinued bit NOT NULL,
     PRIMARY KEY(ProductID)
 );
 
@@ -131,6 +135,5 @@ CREATE TABLE Territories (
 
 CREATE TABLE EmployeeTerritories (
 	EmployeeID int(11) NOT NULL,
-	TerritoryID varchar (20) NOT NULL ,
-    PRIMARY KEY (EmployeeID)
+	TerritoryID varchar (20) NOT NULL 
 );

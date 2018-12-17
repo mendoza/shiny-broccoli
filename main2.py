@@ -54,25 +54,44 @@ class replicador(QThread):
             # el  tres es nuestra bandera
             # el cuatro es nuestro id modificado
             for tabla in results:
-                print("for")
-                print(tabla[2])
-                print(map(lambda a: a.lower(), mytables))
                 if tabla[2].lower() in map(lambda a: a.lower(), mytables):
-                    print("if 1")
                     if tabla[1].lower() == "delete".lower() and tabla[3] == False:
-                        pass
+                        sqlcursor.execute(
+                            "SELECT COLUMN_NAME FROM "+str(self.sqldict['nombredb'])+".INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE TABLE_NAME LIKE '"+str(tabla[2])+"' AND CONSTRAINT_NAME LIKE 'PK%'")
+                        resultado = sqlcursor.fetchall()[0]
+                        pk = resultado[0]
+                        try:
+                            mycursor.execute(
+                                "delete from "+tabla[2]+" where "+pk+" = "+str(tabla[4]))
+                            mysqlcon.commit()
+                            sqlcursor.execute(
+                                "UPDATE MASTER_LOG SET bandera=1 where id="+str(tabla[0]))
+                            sqlcon.commit()
+                        except Exception as e:
+                            print(e)
                     elif tabla[1].lower() == "update".lower() and tabla[3] == False:
-                        pass
-                    elif tabla[1].lower() == "insert".lower() and tabla[3] == False:
-                        print("if 2")
 
                         sqlcursor.execute(
                             "SELECT COLUMN_NAME FROM "+str(self.sqldict['nombredb'])+".INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE TABLE_NAME LIKE '"+str(tabla[2])+"' AND CONSTRAINT_NAME LIKE 'PK%'")
-                        pk = sqlcursor.fetchone()[0]
+                        resultado = sqlcursor.fetchall()[0]
+                        pk = resultado[0]
                         sqlcursor.execute(
-                            "SELECT * FROM ["+str(tabla[2]+"] where "+pk+" ="+tabla[4]))
+                            "SELECT * FROM ["+str(tabla[2]+"] where "+pk+" = '"+tabla[4])+"'")
+                        valores = sqlcursor.fetchone()
+                        sqlcursor.execute("SELECT COLUMN_NAME FROM " +
+                                          self.sqldict["nombredb"]+".INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='"+str(tabla[2])+"'")
+                        columnas = sqlcursor.fetchall()
+                        columnas = map(lambda a: a[0], columnas)
+
+                    elif tabla[1].lower() == "insert".lower() and tabla[3] == False:
+                        sqlcursor.execute(
+                            "SELECT COLUMN_NAME FROM "+str(self.sqldict['nombredb'])+".INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE TABLE_NAME LIKE '"+str(tabla[2])+"' AND CONSTRAINT_NAME LIKE 'PK%'")
+                        resultado = sqlcursor.fetchall()[0]
+                        pk = resultado[0]
                         print(
-                            "SELECT * FROM ["+str(tabla[2]+"] where "+pk+" ="+tabla[4]))
+                            "SELECT * FROM ["+str(tabla[2]+"] where "+pk+" = '"+tabla[4])+"'")
+                        sqlcursor.execute(
+                            "SELECT * FROM ["+str(tabla[2]+"] where "+pk+" = '"+tabla[4])+"'")
                         valores = sqlcursor.fetchone()
                         sqlcursor.execute("SELECT COLUMN_NAME FROM " +
                                           self.sqldict["nombredb"]+".INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='"+str(tabla[2])+"'")
@@ -91,7 +110,6 @@ class replicador(QThread):
                             else:
                                 columns += columnas[i]+")"
                         try:
-                            print("estos son valores :v"+str(valores))
                             mycursor.execute(
                                 "INSERT INTO `"+str(tabla[2])+"` "+columns+" VALUES "+values, list(valores))
                             mysqlcon.commit()

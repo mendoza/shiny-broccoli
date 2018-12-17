@@ -559,14 +559,14 @@ CREATE TRIGGER afterupdateemployees
 ON EMPLOYEES
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','Employeess',0,(SELECT TOP 1  inserted.EmployeeID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Employeess',0,(SELECT TOP 1  deleted.EmployeeID FROM deleted))
 GO
 
 CREATE TRIGGER afterdeleteemployees
 ON EMPLOYEES
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','Employeess',0,(SELECT TOP 1  inserted.EmployeeID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Employeess',0,(SELECT TOP 1  deleted.EmployeeID FROM deleted))
 GO
 --Triggers categories
 CREATE TRIGGER afterinsertcategories
@@ -580,14 +580,14 @@ CREATE TRIGGER afterupdatecategories
 ON CATEGORIES
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','Categories',0,(SELECT TOP 1  inserted.CategoryID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Categories',0,(SELECT TOP 1  deleted.CategoryID FROM deleted))
 GO
 
 CREATE TRIGGER afterdeletecategories
 ON CATEGORIES
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','Categories',0,(SELECT TOP 1  inserted.CategoryID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Categories',0,(SELECT TOP 1  deleted.CategoryID FROM deleted))
 GO
 --Triggers customers
 CREATE TRIGGER afterinsertcustomers
@@ -601,14 +601,14 @@ CREATE TRIGGER afterupdatecostumers
 ON CUSTOMERS
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','Customers',0,(SELECT TOP 1  inserted.CustomerID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Customers',0,(SELECT TOP 1  deleted.CustomerID FROM deleted))
 GO
 
 CREATE TRIGGER afterdeletecustomers
 ON CUSTOMERS
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','Customers',0,(SELECT TOP 1  inserted.CustomerID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Customers',0,(SELECT TOP 1  deleted.CustomerID FROM deleted))
 GO
 --Triggers Shippers
 CREATE TRIGGER afterinsertshippers
@@ -622,14 +622,14 @@ CREATE TRIGGER afterupdateshippers
 ON SHIPPERS
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','Shippers',0,(SELECT TOP 1  inserted.ShipperID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Shippers',0,(SELECT TOP 1  deleted.ShipperID FROM deleted))
 GO
 
 CREATE TRIGGER afterdeleteshippers
 ON SHIPPERS
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','Shippers',0,(SELECT TOP 1  inserted.ShipperID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Shippers',0,(SELECT TOP 1  deleted.ShipperID FROM deleted))
 GO
 --Triggers Suppliers
 CREATE TRIGGER afterinsertsuppliers
@@ -643,14 +643,14 @@ CREATE TRIGGER afterupdatesuppliers
 ON SUPPLIERS
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','Suppliers',0,(SELECT TOP 1  inserted.SupplierID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Suppliers',0,(SELECT TOP 1  deleted.SupplierID FROM deleted))
 GO
 
 CREATE TRIGGER afterdeletesuppliers
 ON SUPPLIERS
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','Suppliers',0,(SELECT TOP 1  inserted.SupplierID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Suppliers',0,(SELECT TOP 1  deleted.SupplierID FROM deleted))
 GO
 --Triggers Orders
 CREATE TRIGGER afterinsertorders
@@ -664,14 +664,14 @@ CREATE TRIGGER afterupdateorders
 ON ORDERS
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','Orders',0,(SELECT TOP 1  inserted.OrderID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Orders',0,(SELECT TOP 1  deleted.OrderID FROM deleted))
 GO
 
 CREATE TRIGGER afterdeleteorders
 ON ORDERS
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','Orders',0,(SELECT TOP 1  inserted.OrderID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Orders',0,(SELECT TOP 1  deleted.OrderID FROM deleted))
 GO
 --Triggers Products
 CREATE TRIGGER afterinsertproducts
@@ -685,14 +685,14 @@ CREATE TRIGGER afterupdateproducts
 ON PRODUCTS
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','Products',0,(SELECT TOP 1  inserted.ProductID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Products',0,(SELECT TOP 1  deleted.ProductID FROM deleted))
 GO
 
 CREATE TRIGGER afterdeleteproducts
 ON PRODUCTS
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','Products',0,(SELECT TOP 1  inserted.ProductID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Products',0,(SELECT TOP 1  deleted.ProductID FROM deleted))
 GO
 
 
@@ -867,14 +867,14 @@ CREATE TRIGGER afterupdateorderdetails
 ON [dbo].[Order Details] 
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','Order Details',0,(SELECT TOP 1  inserted.OrderID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Order Details',0,(SELECT TOP 1  deleted.OrderID FROM deleted))
 GO
 
 CREATE TRIGGER afterdeleteorderdetails
 ON [dbo].[Order Details] 
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','Order Details',0,(SELECT TOP 1  inserted.OrderID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Order Details',0,(SELECT TOP 1  deleted.OrderID FROM deleted))
 GO
 
 INSERT "Order Details" VALUES(10248,11,14,12,0)
@@ -9338,14 +9338,14 @@ CREATE TRIGGER afterupdatecustomercustomerdemo
 ON [dbo].[CustomerCustomerDemo]
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','CustomerCustomerDemo',0,(SELECT TOP 1  inserted.CustomerID  FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','CustomerCustomerDemo',0,(SELECT TOP 1  deleted.CustomerID  FROM deleted))
 GO
 
 CREATE TRIGGER afterdeletecustomercustomerdemo
 ON [dbo].[CustomerCustomerDemo]
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG  VALUES ('delete','CustomerCustomerDemo',0,(SELECT TOP 1  inserted.CustomerID  FROM inserted))
+INSERT INTO MASTER_LOG  VALUES ('delete','CustomerCustomerDemo',0,(SELECT TOP 1  deleted.CustomerID  FROM deleted))
 GO
 --Triggers CustomerDemographics
 CREATE TRIGGER afterinsertcustomerdemographics
@@ -9359,14 +9359,14 @@ CREATE TRIGGER afterupdatecustomerdemographics
 ON [dbo].[CustomerDemographics] 
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('Update','CustomerDemographics',0,(SELECT TOP 1 inserted.CustomerTypeID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Update','CustomerDemographics',0,(SELECT TOP 1 deleted.CustomerTypeID FROM deleted))
 GO
 
 CREATE TRIGGER afterdeletecustomerdemographics
 ON [dbo].[CustomerDemographics] 
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('Delete','CustomerDemographics',0,(SELECT TOP 1 inserted.CustomerTypeID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Delete','CustomerDemographics',0,(SELECT TOP 1 deleted.CustomerTypeID FROM deleted))
 GO
 
 --Triggers EmployeeTerritories
@@ -9381,14 +9381,14 @@ CREATE TRIGGER afterupdateemployeeterritories
 ON [dbo].[EmployeeTerritories] 
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('Update','EmployeeTerritories',0,(SELECT TOP 1 inserted.EmployeeID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Update','EmployeeTerritories',0,(SELECT TOP 1 deleted.EmployeeID FROM deleted))
 GO
 
 CREATE TRIGGER afterdeleteemployeeterritories
 ON [dbo].[EmployeeTerritories] 
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('Delete','EmployeeTerritories',0,(SELECT TOP 1 inserted.EmployeeID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Delete','EmployeeTerritories',0,(SELECT TOP 1 deleted.EmployeeID FROM deleted))
 GO
 
 --Triggers Region
@@ -9403,14 +9403,14 @@ CREATE TRIGGER afterupdateregion
 ON [dbo].[Region] 
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('Update','Region',0,(SELECT TOP 1 inserted.RegionID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Update','Region',0,(SELECT TOP 1 deleted.RegionID FROM deleted))
 GO
 
 CREATE TRIGGER afterdeleteregion
 ON [dbo].[Region] 
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('Delete','Region',0,(SELECT TOP 1 inserted.RegionID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('Delete','Region',0,(SELECT TOP 1 deleted.RegionID FROM deleted))
 GO
 --Triggers Territories
 CREATE TRIGGER afterinsertterritories
@@ -9424,14 +9424,14 @@ CREATE TRIGGER afterupdateterritories
 ON [dbo].[Territories] 
 AFTER UPDATE
 AS
-INSERT INTO MASTER_LOG VALUES ('update','Territories',0,(SELECT TOP 1  inserted.TerritoryID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('update','Territories',0,(SELECT TOP 1  deleted.TerritoryID FROM deleted))
 GO
 
 CREATE TRIGGER afterdeleteterritories
 ON [dbo].[Territories] 
 AFTER DELETE
 AS
-INSERT INTO MASTER_LOG VALUES ('delete','Territories',0,(SELECT TOP 1  inserted.TerritoryID FROM inserted))
+INSERT INTO MASTER_LOG VALUES ('delete','Territories',0,(SELECT TOP 1  deleted.TerritoryID FROM deleted))
 GO
 
 
